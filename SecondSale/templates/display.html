@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>OLX</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-signin-client_id" content="1088402062696-891304401gk4t8o90drttj0imbs07169.apps.googleusercontent.com">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+<meta charset=utf-8 />
+
+  <style>
+    article, aside, figure, footer, header, hgroup,
+  menu, nav, section { display: block; }
+        .dp{
+      width: 40%;
+      height: 179px;
+    }
+
+    .item{
+      margin-bottom: 5%;
+    }
+    article, aside, figure, footer, header, hgroup,
+  menu, nav, section { display: block; }
+
+
+.zoom {
+-webkit-transition: all 0.35s ease-in-out;
+-moz-transition: all 0.35s ease-in-out;
+transition: all 0.35s ease-in-out;
+cursor: -webkit-zoom-in;
+cursor: -moz-zoom-in;
+cursor: zoom-in;
+}
+
+.zoom:hover,
+.zoom:active,
+.zoom:focus {
+/**adjust scale to desired size,
+add browser prefixes**/
+-ms-transform: scale(1.5);
+-moz-transform: scale(1.5);
+-webkit-transform: scale(1.5);
+-o-transform: scale(1.5);
+transform: scale(1.5);
+position:relative;
+z-index:50;
+}
+
+.DivName {cursor: pointer}
+}
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse ">
+
+  <div class="container-fluid">
+    <div class="navbar-header" style="padding:1%;">
+      <a class="navbar-brand" href="/displayAds" >Home Page</a>
+    </div>
+    <div style="color: white;"><center><h2>SECOND SALE</h2></center></div>
+    <ul class="nav navbar-nav navbar-right" style="padding: 1%;">
+        {% if not session.logged_in %}
+          <li><a href="/signup"><span class="glyphicon glyphicon-user">signup</span></a></li>
+          <li><a href="/login"><span class="glyphicon glyphicon-log-in" >login</span></a></li>
+          <li><a href="/login"><span class="">PostAd!!!</span></a></li>
+        {% else %}
+          <li><a href="/postAd"><span class="glyphicon glyphicon-cloud-upload">&nbsp;PostAd!!!</span></a></li>
+          <li><a href="/logout"><span class="glyphicon glyphicon-log-out">&nbsp;logout</span></a></li>
+        {% endif %}
+    </ul>
+  </div>
+</nav>
+
+<!-- <div class="container">
+  <button type="button" class="btn btn-link">previous</button>
+</div>
+ -->
+<div class="col-md-4 well" id="ad" style="margin-left: 5%;">
+<h1> {{d[1][2]}}</h1>
+<ul class="list-inline gallery">
+<li style="margin-left: 5%;"><img  class ="thumbnail zoom" src="{{url_for('send_image',filename= d[0] )}}" width="450" height="450" id="image" style=""></li>
+</ul>
+</div>
+<div class="col-md-4" style="margin-top: 5%; margin-left: 10%;">
+  <h2><strong>Price:&nbsp;</strong>&nbsp;<sup style="font-size: 60%;">&#8377;</sup>{{d[1][4]}}</h2>
+<h3><strong>Description:</strong> {{d[1][3]}}</h3>
+<h3><strong>Contact info</strong></h3>
+<h4> Name:{{d[1][5]}}</h4>
+<h4> Phno:{{d[1][6]}}</h4>
+<br>
+{% if session.logged_in %}
+  {% if (d[1][7] == 0 and session.user == d[1][5] ) : %}
+   <form method="post">
+  <input type="checkbox" name="Mark">
+  <input type="submit" class="btn btn-success" value="MarkAsSold">
+  </form>
+    {% elif (d[1][7] == 1): %}
+      <p style="color: red; font-size: 150%;">SoldOut!!</p>
+    {% endif %}
+  {% if (session.user == d[1][5]): %}
+<!-- <form method="post"> -->
+  <!-- <button type="submit" class="btn btn-warning" onclick="Mark(d[0])">MarkAsSold</button> -->
+  <!-- <input type="checkbox" name="Mark"> -->
+  <!-- <input type="submit" class="btn btn-danger" value="Mark"> -->
+<!-- </form> -->
+<!-- <br> -->
+<br>
+{% endif %}
+{% endif %}
+<br>
+
+<h4> <strong>Safety Tips for Buyers</strong></h4>
+<dl>
+<dd>1) Meet seller at a safe location</dd>
+<dd>2) Check the item before you buy</dd>
+<dd>3) Pay only after collecting item</dd>
+</dl>
+{% if session.logged_in %}
+<!-- <button type="button" class="btn btn-success">Click to Chat</button> -->
+{% else %}
+<a href="/login"><button type="button" onClick='' class="btn btn-success" style="">Login To Chat</button></a>
+{% endif %}
+<br><br>
+{% if session.logged_in %}
+<form method="POST" style="padding-top: 2%;">
+      <textarea name="content" id="commentbox"></textarea>
+      <br>
+      <br>
+      <input type="submit" name="comment" class="btn btn-success">
+</form>
+    <br>
+    {% for i in stmt %}
+<div class="alert alert-info" style="color: green;">
+  <strong>{{i.name}}:</strong> {{ i.discussion }}
+</div>
+<br>
+{% endfor %}
+</div>
+<br>
+{% endif %}
+</body>
+<script type="text/javascript">
+  function init() {
+    // Clears the TextArea
+    document.getElementById("commentbox").value = "";
+}
+window.onload = init;
+</script>
+</html>

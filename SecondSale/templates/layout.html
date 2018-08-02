@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>OLX</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="google-signin-client_id" content="1022734059988-ssgbajfk77cnrak3bs1s6f0i3eoao6if.apps.googleusercontent.com">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+<meta charset=utf-8 />
+
+  <style>
+    .dp{
+      width: 40%;
+      height: 179px;
+    }
+    .item{
+      margin-bottom: 5%;
+    }
+
+    #navigation{
+      /*position: absolute;*/
+    }
+    article, aside, figure, footer, header, hgroup,
+  menu, nav, section { display: block; }
+
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse " id="navigation">
+
+  <div class="container-fluid">
+    <div class="navbar-header" style="padding: 1%;">
+      <a class="navbar-brand" href="/displayAds" class="glyphicon glyphicon-home" >Home Page</a>
+
+    </div>
+     <div style="color: white;"><center><h2>SECOND SALE</h2></center></div>
+   {% if session.logged_in %}
+    <ul class="nav navbar-nav navbar-right" style="padding: 1%;">
+        <!-- <li><a href="/signup"><span ></span>signup</a></li> -->
+        <li><a href="/logout"><span class="glyphicon glyphicon-log-out"> &nbsp;logout</span></a></li>
+    </ul>
+
+   {% else %}
+    <ul class="nav navbar-nav navbar-right">
+        <li><a href="/signup"><span class="glyphicon glyphicon-user">signup</span></a></li>
+        <li><a href="/login"><span class="glyphicon glyphicon-log-in">login</span></a></li>
+    </ul>
+  {% endif %}
+  </div>
+</nav>
+<div class="container" >
+    {% block body %}
+    {% endblock %}
+</div>
+
+</body>
+<script>
+function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah')
+                    .attr('src', e.target.result)
+                    .width(200)
+                    .height(200);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+</html>

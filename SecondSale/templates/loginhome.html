@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block body %}
+
+    
+    <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+
+    	<h1> Post your add here </h1>
+
+    	<input type='file' name="file" onchange="readURL(this);" />
+    <img id="blah" src="#" alt="your image" />
+    <h2> Enter the description</h2>
+      <dl>
+        <dt>Type of product :
+        <dd><input type="text" name="producttype">
+        	<br>
+
+
+        <label for="comment">Description</label>
+  <textarea class="form-control" rows="3"   name="description" ></textarea>
+  <dt> price:
+    <dd><input type="text" name="price">
+  <h2> Contact details</h2>
+  <dt>Name :
+        <dd><input type="text" name="name">
+        	<dt>phone number :
+        <dd><input type="text" name="phno">
+        
+        
+        <dd><input type="submit" value="sell">
+      </dl>
+    </form>
+
+
+{% endblock %}

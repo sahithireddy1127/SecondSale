@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Total Ads</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- <title>Total Ads</title> -->
+  <!-- <meta charset="utf-8"> -->
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+  <script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5ae30485de20620011e03350&product=sticky-share-buttons"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="sharethis-inline-reaction-buttons"></div>
+<div class="container">
+  <div class="container" style='margin-top: 20px;'>
+  <nav class="navbar navbar-inverse" style='background-color: white;border:none'>
+    <div class="navbar-header">
+        {% if not session.logged_in %}
+        <ul class="nav navbar-nav" style="float: right;">
+          <ul class="nav navbar-nav navbar-right">
+          <li><a href="/signup"><span >signup</span></a></li>
+          <li><a href="/login"><span >login</span></a></li>
+          <!-- <li><a href="/login"><span>PostAd!!!</span></a></li> -->
+          </ul>
+        </ul>
+        {% endif %}
+        {% if session.logged_in %}
+        <ul class="nav navbar-nav" style="float: right;">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/postAd"><span>PostAd!!!</span></a></li>  
+            <li><a href="/logout"><span>logout</span></a></li>
+          </ul>
+        </ul>
+        {% endif %}
+    </div>
+  </nav>
+  <h2>Ads</h2>
+  {% if image_names %}
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to='0' class="active"></li>
+      {% for i in  range(1,length) %}
+      <li data-target="#myCarousel" data-slide-to='{{ i }}'></li>
+      {% endfor %}
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+      <div class="item active">
+      <a href="/render_ad/{{ad1}}/{{cnt}}/{{ph}}"> <img class="img-responsive" src="{{url_for('send_image',filename=ad1)}}" 
+         style="width: 60%; padding-left: 10%;">
+         </a>
+         
+        <div class="carousel-caption">
+          <p>{{ cnt }}</p>
+        </div>
+      </div>
+
+      {% for key,value in image_names.items() %}
+      {% if not key=="0.JPG" %}
+        
+      <div class="item">
+      <a href="/render_add/{{key}}/{{value[0]}}/{{value[1]}}">
+        <img class="img-responsive" src="{{url_for('send_image',filename=key)}}" style="width: 60%;">
+        <div class="carousel-caption">
+          <p>{{ value[0] }}</p>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}  
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+  {% endif %}
+</div>
+</body>
+<script type="text/javascript">Location.reload()</script>>
+</html>

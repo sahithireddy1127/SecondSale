@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block body %}
+<h1>Signup</h1>
+{% if error %}<p class="error" style="color:red;"><strong>Error:</strong> {{ error }}
+    {% endif %}
+
+<style>
+input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.container {
+    background-color: #f1f1f1;
+    padding: 20px;
+}
+</style>
+<form action="{{ url_for('signup') }}" method="post">
+      <dl>
+      <dt>Username:
+        <dd><input type="text" name="uname" required>
+        <dt>Email:
+        <dd><input type="email" name="username" required>
+        <dt>Mobile:
+        <dd><input type="text" name="Mobile" required>
+        <dt>Password:
+        <dd><input type="password" id="password" name="password" required>
+        <dt>confirm password
+        <dd ><input type="password" name="confirmpassword" required>
+            <br>
+            <br>
+        <dd><input type="submit" value="Signup" style="">
+      </dl>
+    </form>
+
+{% endblock %}

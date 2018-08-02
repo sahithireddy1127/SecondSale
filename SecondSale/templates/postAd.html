@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% block body %}
+
+    <!-- {% if session.logged_in %}
+      <a href="/"><span >Home</span></a>
+    {% endif %} -->
+    {% if error %}
+    <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    {% if session.logged_in %}
+    <form method="post" enctype="multipart/form-data">
+      <h1> Post your add here </h1>
+      <input type='file' name="file" class="" onchange="readURL(this);" required/>
+      <img id="blah" src="#" alt="your image" />
+      <h2> Enter the description</h2>
+        <dl>
+          <dt>Type of product :
+          <dd><input type="text" name="producttype">
+        	 <br>
+          <label for="comment">Description</label>
+          <textarea class="form-control" rows="3"   name="description"  required=""></textarea>
+          <dt> price:
+        <dd><input type="text" name="price" required>
+        <h2> Contact details</h2>
+        {% if name and Mobile %}
+        <dt>Name :
+          <dd>{{ name }}
+          <dt>phone number :
+          <dd>{{ Mobile }}
+            <br>
+            <br>
+          <dd><input type="submit" value="sell" class="btn btn-success">
+        </dl>
+        {% else %}
+        <dt>Name:
+          <dd><input type="text" name="seller">
+          <dt>phone number :<br>
+          <dd><input type="text" name="Mobile">
+            {% if phoneNumber %}
+            <p style="color: red;">{{phoneNumber}}</p>
+          <dd><input type="submit" value="sell" class="btn btn-success">
+            {% endif %}
+        </form>
+        {% endif %}
+      {% endif %}
+{% if not session.logged_in %}
+<h1>you are not logged in</h1>
+<a href="/displayAds">Adds</a>
+  {% endif %}
+{% endblock %}

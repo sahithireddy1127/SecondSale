@@ -1,0 +1,95 @@
+{% extends "layout.html" %}
+{% block body %}
+<!-- <h1 id="olx" style=>OLX</h1> -->
+
+{% if error %}<p class="error"><strong>Error:</strong> {{ error }}{% endif %}
+<style type="text/css">
+#olx{
+	top: 10px;
+	font-family: Merriweather;
+	font-size: 50px;
+	color: black;
+
+}
+	#signup{
+			background-color: black;
+			font-size: 15px;
+			color: white;
+			font-size: 20px;
+			font-family: Merriweather;
+			width: 300px;
+			padding: 15px;
+			text-align: center;
+		 	position: absolute;
+		 	top: 500px;
+    		right: 600px;
+    		width: 300px;
+			border-radius: 10px;
+			box-shadow: 10px 10px grey;
+			border:30px solid:#B9770E;
+	}
+	#form
+	{
+		background-color: black;
+			font-size: 20px;
+			color: white;
+
+			font-family: Merriweather;
+			width: 300px;
+			padding: 15 px;
+		text-align: center;
+		 position: absolute;
+		 top: 200px;
+    	right: 600px;
+    	width: 300px;
+			border-radius: 10px;
+			box-shadow: 10px 10px grey;
+			border:30px solid:#B9770E;
+	}
+	#log{
+		top: 100px;
+    	right: 300px;
+    	width: 100px;
+	}
+</style>
+<!-- <div id="log"><h1>Login<h1></h1></div> -->
+<div class="col-md-3 col-md-offset-4" id="form">
+
+    <form action="{{ url_for('login') }}" style="text-align: center;" method="post">
+    <div class="form-group">
+      <dl>
+        <dt>Email id:
+        <dd><input type="email" name="username" style="color: black;">
+        	<br>
+        <dt>Password:
+        	<br>
+        <dd><input type="password" name="password"  style="color: black;" required>
+        	<br>
+        	<br>
+        <dd><input type="submit" style="color: black;" value="Login" >
+      </dl>
+  </dd>
+<div class="g-signin2" data-onsuccess="onSignIn" align="center">
+      </div>
+      </div>
+    </form>
+  </div>
+
+<div id="signup">
+    <a href="/signup"><span style="color: white">signup</span></a>
+    </div>
+ <script>
+  function onSignIn(googleUser)
+  {
+
+  var profile = googleUser.getBasicProfile();
+  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+  console.log('Name: ' + profile.getName());
+  console.log('Image URL: ' + profile.getImageUrl());
+  console.log('Email: ' + profile.getEmail());
+  window.location.href="/gmailSignIn/"+profile.getName()+"/"+profile.getEmail();
+  }
+</script>
+{% endblock %}
+
+
